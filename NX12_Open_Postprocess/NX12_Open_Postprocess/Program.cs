@@ -6,7 +6,6 @@ public class Program
     // class members
     private static Session theSession;
     public static Program theProgram;
-    public static bool isDisposeCalled;
 
     //------------------------------------------------------------------------------
     // Constructor
@@ -16,7 +15,6 @@ public class Program
         try
         {
             theSession = Session.GetSession();
-            isDisposeCalled = false;
         }
         catch (NXOpen.NXException ex)
         {
@@ -43,7 +41,6 @@ public class Program
         catch (NXOpen.NXException ex)
         {
             // ---- Enter your exception handling code here -----
-
         }
         return retValue;
     }
@@ -53,32 +50,16 @@ public class Program
     //------------------------------------------------------------------------------
     public void Dispose()
     {
-        try
-        {
-            if (isDisposeCalled == false)
-            {
-                //TODO: Add your application code here 
-            }
-            isDisposeCalled = true;
-        }
-        catch (NXOpen.NXException ex)
-        {
-            // ---- Enter your exception handling code here -----
-
-        }
     }
-
+    
+    //-------------------------------------------------------------------------
+    // The following method is used to unload the library from NX environment
+    //-------------------------------------------------------------------------
     public static int GetUnloadOption(string arg)
     {
-        //Unloads the image explicitly, via an unload dialog
-        //return System.Convert.ToInt32(Session.LibraryUnloadOption.Explicitly);
-
-        //Unloads the image immediately after execution within NX
-        // return System.Convert.ToInt32(Session.LibraryUnloadOption.Immediately);
-
         //Unloads the image when the NX session terminates
         return System.Convert.ToInt32(Session.LibraryUnloadOption.AtTermination);
     }
 
-}
+}// End of class area
 
